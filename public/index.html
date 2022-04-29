@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h1>Company Name</h1>
+        <nav>
+            <li>Home</li>
+            <li>Admin</li> <!-- Desplegara panel de logeo para Admins-->
+            <li>Cart</li> <!-- Link a Carrito-->
+        </nav>
+    </header>
+
+    <main id="main">
+
+        <h2>Admin Sing In</h2>
+        <input type="text" placeholder="User">
+        <input type="text" placeholder="Password">
+        <!-- <button id="signIn">Sing In</button> -->
+        <button onclick='()=>{console.log(true)}'>Sing In</button>
+
+        <h2>Stock Manager</h2>
+        <section>
+            <div class="panelController">
+                <h3>User panel</h3>
+                <button onclick="location.href='/home/users/products/list'">Show assets</button> <!-- Solo Users -->
+    
+                <h3>Admin Panel</h3>
+                <form action="/home/admin/products/add" method="POST"> <!-- Formulario se manejará con el estado através de public.js-->
+                    Category: <input type="text" placeholder="Category" id="category" name="category" required>
+                    Name: <input type="text" placeholder="Name" id="name" name="name" required>
+                    Description: <input type="text" placeholder="Description" id="description" name="description">
+                    Code: <input type="text" placeholder="Code" id="code" name="code" required>
+                    Img: <input type="text" placeholder="Attach img url" id="img" name="img">
+                    Stock: <input type="number" placeholder="Stock" id="stock" name="stock" required>
+                    <br>
+                    <br>
+                    <button>Save</button> 
+                    <button onclick="location.href='/home/admin/products/list'">Show assets</button> <!-- Solo Users -->
+                </form>
+            </div>
+            
+            <aside>
+                <!-- Display de data -->
+            </aside>
+        </section>  
+
+        <h2>Cart</h2>
+        <div>
+            <!-- Cart Display-->
+        </div>
+    </main>
+
+    <footer></footer>
+</body>
+<script src="./public.js"></script>
+</html>
