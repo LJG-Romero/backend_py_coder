@@ -8,16 +8,16 @@ class Database {
     }
     async saveData(data){
         try{
+            console.log(`${data} on db handler`); /** Tester **/
             let temp = JSON.stringify(data)
             // console.log(JSON.stringify(data))
-            console.log(temp);
+            console.log(temp); /** Tester **/
             // let temp = 'otra prueba'
             await fs.promises.writeFile(this.filename, JSON.stringify(data));
             console.log('saved!');
         }
         catch(err){
-            console.log(JSON.stringify(data));
-            console.log(`Ups, file missed ... Error: ${err}`);
+            console.log(`Ups, not possible to execute writing ... Error: ${err}`);
             
         }
     }
@@ -32,7 +32,7 @@ class Database {
             }
         }
         catch(err){
-            console.log(`Ups, file missed ... Error: ${err}`);
+            console.log(`Ups, file missed. Not possible to execute reading ... Error: ${err}`);
         }
     }
     async getAll() {
@@ -43,12 +43,11 @@ class Database {
 
                 data = JSON.parse(data);
             }
-            // console.log(dataStrg);
             return data;
         }
         catch(err){
-            console.log(`Ups, file missed ... Error: ${err}`);
-            console.log(this.filename)
+            console.log(`Ups, file missed. Not possible to execute reading ... Error: ${err}`);
+            console.log(this.filename) /** Tester **/
         }
         
     }

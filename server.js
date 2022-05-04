@@ -53,10 +53,9 @@ if (userState){
 }
 else{
     routerUsers.get('/products/list', async (req, res) => {
-        console.log(userState)
-        console.log('entro else')
+        console.log(userState) /** Tester **/
         let data = await handler.getAll()
-        console.log(data);
+        console.log(data); /** Tester **/
 
         if (data == undefined){
             // let empty = [{prueba: 'test'}]
@@ -65,14 +64,19 @@ else{
             // let temp = 'una prueba mas'
             handler.saveData('');
             res.send(
-                `<p><strong>No data to show</strong></p>`
+                `<p><strong> No data to show. Then, data base inicializated ! </strong></p>
+                <button onclick="location.href='/home'">Home</button>
+                `
             )
         }
         else{
             let html = '';
             if(data == ''){
                res.send(
-                   `<p><strong>Still NO data to show</strong></p>`
+                   `
+                    <p><strong> Still NO data to show ! </strong></p>
+                    <button onclick="location.href='/home'">Home</button>
+                   `
                )
             }
             else{
@@ -83,7 +87,9 @@ else{
                                    <p>Product name: ${product.name}</p>
                                    <p>Product description: ${product.description}</p>
                                    <p>Product code: ${product.code}</p>
+                                   <img src="${product.img}" alt="${product.name} image">
                                    <p>Product stock: ${product.stock}</p>
+                                    <button onclick="location.href='/home'">Home</button>
                                </div> 
                                <br>`
                    html += temp;
@@ -96,7 +102,37 @@ else{
 // routerCart.get('/')
 
 /*** Post ***/
-routerAdmin.post('products/add', (req, res) => {
+routerAdmin.post('/products/add', async (req, res) => {
+    let data = await handler.getAll();
+    console.log(data); /** Tester **/
+    if (data != undefined){
+        data = [];
+        let temp = req.body;
+        console.log(temp); /** Tester **/
+        let newAsset = {
+            id: data.length + 1,
+            ...temp
+        }
+        console.log(newAsset); /** Tester **/
+        data.push(newAsset);
+        console.log(data); /** Tester **/
+        handler.saveData(data);
+        res.send(
+            `
+            <p>Data loaded !</p>
+            <button onclick="location.href='/home'">Home</button>
+            `
+        )
+    }    
+    else{
+        res.send(
+            `
+            <p><strong> Ups, Data base not inicializated ! </strong></p>
+            <button onclick="location.href='/home'">Home</button>
+            `
+        )
+    }
+
 
 })
 
